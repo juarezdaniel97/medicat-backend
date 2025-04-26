@@ -41,4 +41,4 @@ class PermissionServices extends IRepository {
     }
 }
 
-export default new PermissionServices;
+export default new PermissionServices();

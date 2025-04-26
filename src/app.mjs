@@ -5,7 +5,7 @@ import express from "express";
 import authRoutes from './routes/authRoutes.mjs';
 import roleRoutes from './routes/roleRoutes.mjs';
 import permissionRoutes from "./routes/permissionRoutes.mjs";
-
+import profileRoutes from "./routes/profileRoutes.mjs";
 
 
 //CARGAR LAS VARIABLES DE ENTORNO
@@ -21,10 +21,12 @@ connect_BD();
 app.use(express.json());
 
 //RUTAS
-//app.use('/api', userRoutes)
 app.use('/api', authRoutes)
 app.use("/api/roles", roleRoutes);
 app.use("/api/permissions", permissionRoutes);
+app.use("/api", profileRoutes);
+
+
 
 app.get('/', (req, res)=>{
     res.json('Home')

@@ -44,4 +44,4 @@ class RoleServices extends IRepository {
     }
 }
 
-export default new RoleServices;
+export default new RoleServices();

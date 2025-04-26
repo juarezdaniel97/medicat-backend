@@ -73,4 +73,4 @@ class AuthServices extends IRepository {
         }
 }
 
-export default new AuthServices
+export default new AuthServices();

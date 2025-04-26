@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const profileSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
-    firsName: {type: String},
+    firstName: {type: String},
     lastName: {type: String},
     phoneNumber: {type: String},
     dateOfBirth: {type: Date},
