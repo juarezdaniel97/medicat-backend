@@ -22,8 +22,8 @@ app.use(express.json());
 
 //RUTAS
 app.use('/api', authRoutes)
-app.use("/api/roles", roleRoutes);
-app.use("/api/permissions", permissionRoutes);
+app.use("/api", roleRoutes);
+app.use("/api", permissionRoutes);
 app.use("/api", profileRoutes);
 
 
