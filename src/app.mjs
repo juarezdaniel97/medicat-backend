@@ -7,6 +7,7 @@ import roleRoutes from './routes/roleRoutes.mjs';
 import permissionRoutes from "./routes/permissionRoutes.mjs";
 import profileRoutes from "./routes/profileRoutes.mjs";
 import doctorRoutes from "./routes/doctorRoutes.mjs";
+import patientRoutes from "./routes/patientRoutes.mjs";
 
 //CARGAR LAS VARIABLES DE ENTORNO
 config({path: '../.env'})
@@ -26,6 +27,7 @@ app.use("/api", roleRoutes);
 app.use("/api", permissionRoutes);
 app.use("/api", profileRoutes);
 app.use("/api", doctorRoutes);
+app.use("/api", patientRoutes);
 
 
 

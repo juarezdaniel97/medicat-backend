@@ -4,7 +4,6 @@ const patientProfileSchema = new mongoose.Schema({
     profileId: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true, unique: true },
     emergencyContact: { name: String, relationship: String, phoneNumber: String },
     healthInsurance: { provider: String, policyNumber: String },
-    favoriteSpecialists: [{type: mongoose.Schema.Types.ObjectId, ref: 'DoctorProfile' }],
     medicalHistory: {
         allergies: [String],
         chronicConditions: [String],
