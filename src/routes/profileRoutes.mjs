@@ -9,10 +9,19 @@ import {
 
 const router = express.Router();
 
+//Crear un perfil (datos basicos: nombre, sexo, dirección, etc)
 router.post("/profile/create", createProfile);
+
+//Actualizar un perfil
 router.put("/profile/update/:id", updateProfile); // :id = userId
+
+//Eliminar un perfil
 router.delete("/profile/delete/:id", deleteProfile);
-router.get("/profile/:id", getProfile);
+
+//Obtener todos los perfiles 
 router.get("/profiles/list", listProfile);
+
+//Obtener perfil por ID
+router.get("/profile/:id", getProfile);
 
 export default router;
