@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import { connect_BD } from "./config/dbConfig.mjs";
 import express from "express";
-// import userRoutes from './routes/UserRoutes.mjs';
+import cors from "cors";
 import authRoutes from './routes/authRoutes.mjs';
 import roleRoutes from './routes/roleRoutes.mjs';
 import permissionRoutes from "./routes/permissionRoutes.mjs";
@@ -18,11 +18,22 @@ config({path: '../.env'})
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const corsOptions = {
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    credentials: true,
+    maxAge: 86400
+};
+
+
 //Conección a la BD
 connect_BD();
 
 //MIDDLEWARE
 app.use(express.json());
+app.use(cors(corsOptions));
 
 //RUTAS
 app.use('/api', authRoutes)
@@ -43,6 +54,11 @@ app.get('/health', (req, res) => {
 app.get('/', (req, res)=>{
     res.json({message: "API FUNCIONANDO"})
 })
+
+
+app.use((req, res, next) => {
+    res.status(404).json({message: "La ruta solicitada no existe"});
+    });
 
 app.listen(PORT, ()=>{
     console.log(`El servidor está ejecutando http://localhost:${PORT}`); 
