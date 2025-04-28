@@ -16,7 +16,7 @@ import appointmentRoutes from "./routes/appointmentRoutes.mjs";
 config({path: '../.env'})
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 //Conección a la BD
 connect_BD();
@@ -35,9 +35,13 @@ app.use("/api", adminRoutes);
 app.use("/api", appointmentRoutes);
 
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK', timestamp: new Date() });
+});
 
 app.get('/', (req, res)=>{
-    res.json('Home')
+    res.json({message: "API FUNCIONANDO"})
 })
 
 app.listen(PORT, ()=>{
