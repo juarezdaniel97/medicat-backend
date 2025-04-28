@@ -4,6 +4,12 @@ import { IRepository } from "../repository/IRepository.mjs";
 class DoctorProfileServices extends IRepository{
 
     async create(data){
+        
+        const existingProfile = await DoctorProfile.findOne({ profileId: data.profileId });
+        
+        if (existingProfile) {
+            throw new Error("Ya existe un perfil de doctor para este usuario.");
+        }
         const doctorProfile = new DoctorProfile(data);
         return await doctorProfile.save();
     }

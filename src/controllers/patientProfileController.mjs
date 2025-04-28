@@ -8,6 +8,12 @@ export const createPatient = async (req, res) => {
         res.status(201).json(patient);
         
     } catch (error) {
+        //Si el error es por duplicación de perfil
+        if (error.message.includes("Ya existe un perfil de paciente")) {
+            return res.status(409).json({ message: error.message }); // 409 Conflict
+        }
+
+        //Otros errores
         res.status(400).json({ message: error.message });
     }
 }

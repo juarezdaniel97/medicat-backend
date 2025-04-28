@@ -54,7 +54,14 @@ export const listDoctor = async (req, res) => {
     try {
         const doctorProfiles = await DoctorProfileServices.getAll()
         res.status(200).json(doctorProfiles);
+
     } catch (error) {
+         //Si el error es por duplicación de perfil
+        if (error.message.includes("Ya existe un perfil de doctor")) {
+            return res.status(409).json({ message: error.message }); // 409 Conflict
+        }
+
+        //Otros errores
         res.status(400).json({ message: error.message });
     }
 }
