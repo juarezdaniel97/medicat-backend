@@ -8,8 +8,13 @@ class AuthServices extends IRepository {
         
         async register(data){
     
-            const exitingUser = await User.findOne({ username: data.username})
-            
+            //const exitingUser = await User.findOne({ username: data.username})
+            const exitingUser = await User.findOne({  $or: [
+                { email: data.email },
+                { username: data.username }
+            ]})
+
+
             if (exitingUser) {
                 throw new Error("El usuario ya existe");
             }
@@ -47,8 +52,9 @@ class AuthServices extends IRepository {
             return {user: userResponse, token}
         }
     
-        async login(username, password) {
-            const user = await User.findOne({username});
+        async login(email, password) {
+            
+            const user = await User.findOne({email});
             
             if (!user) {
                 throw new Error("Usuario no encontrado");

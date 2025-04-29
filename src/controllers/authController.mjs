@@ -17,9 +17,9 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async ( req, res) =>{
     try {
-        const {username, password} = req.body
+        const {email, password} = req.body
 
-        const user = await authServices.login(username, password);
+        const user = await authServices.login(email, password);
         res.json(user);
 
     } catch (error) {
