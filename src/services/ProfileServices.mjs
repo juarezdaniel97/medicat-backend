@@ -15,9 +15,7 @@ class ProfileService extends IRepository{
     
     async create(data){
         try {
-            // if (!mongoose.Types.ObjectId.isValid(data.userId)) {
-            //     throw new Error("userId no es un ObjectId válido");
-            // }
+
             const existingProfile = await Profile.findOne({userId: data.userId});
             if (existingProfile) {
                 throw new Error("El perfil para este usuario ya existe.");
@@ -35,7 +33,7 @@ class ProfileService extends IRepository{
 
     async getFindById(id){
         try {
-            const profile = await Profile.findOne({ userId: id }); // Busca por userId
+            const profile = await Profile.findById(id)
             
             if (!profile) {
                 throw new Error("Perfil no encontrado");
@@ -48,12 +46,9 @@ class ProfileService extends IRepository{
         }
     }
 
-    async update(userId, data){
+    async update(id, data){
         try {
-            const profile = await Profile.findOneAndUpdate(
-                { userId },
-                { ...data, updatedAt: Date.now() },
-                { new: true });
+            const profile = await Profile.findByIdAndUpdate(id, {...data, updatedAt: Date.now() }, {new: true})
             
             if (!profile) {
                 throw new Error('Perfil no encontrado para actualizar.');
@@ -66,10 +61,12 @@ class ProfileService extends IRepository{
         }
     }
 
-    async deleteById(userId){
-        try {
-            const profile = await Profile.findOneAndDelete({userId});
+    async deleteById(id){
 
+        try {
+            
+            const profile = await Profile.findByIdAndDelete(id)
+            
             if (!profile) {
                 throw new Error("Perfil no encontrado para eliminar.");
             }

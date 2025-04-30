@@ -9,18 +9,34 @@ export const getProfile = async (req, res) =>{
         res.status(200).json(profile);
 
     } catch (error) {
-        res.status(400).json({ message: error.message });
+
+        if (error.message.includes("Perfil no encontrado")) {
+            return  res.status(404).json({ message: error.message });
+        }
+
+        res.status(500).json({ message: error.message });
     }
 }
 
 export const createProfile = async (req, res) =>{
     try {
-        const data = req.body;
-        const profile = await ProfileServices.create(data);
+        
+        const { id } = req.user //saco el id del token
+        const data = req.body; // datos desde front
+
+        const datosUser = { userId: id,  ...data}
+        
+        const profile = await ProfileServices.create(datosUser);
         res.status(201).json(profile);
 
     } catch (error) {
-        res.status(400).json({ message: error.message });
+
+         //Si el error es por duplicación de perfil
+        if (error.message.includes("El perfil para este usuario ya existe.")) {
+            return res.status(409).json({ message: error.message }); 
+        }
+
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -31,7 +47,10 @@ export const updateProfile = async (req, res) =>{
         res.status(200).json(updateProfile);
 
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        if (error.message.includes("Perfil no encontrado para actualizar")) {
+            return res.status(404).json({ message: error.message });
+        }
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -42,7 +61,11 @@ export const deleteProfile = async (req, res) =>{
         res.status(200).json({message: "Perfil Eliminado", deleteProfile});
 
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        
+        if (error.message.includes("Perfil no encontrado para eliminar")) {
+            return res.status(404).json({ message: error.message });
+        }
+        res.status(500).json({ message: error.message });
     }
 }
 
