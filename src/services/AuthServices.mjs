@@ -16,7 +16,7 @@ class AuthServices extends IRepository {
 
 
             if (exitingUser) {
-                throw new Error("El usuario ya existe");
+                throw new Error("El usuario y/o email ya existe");
             }
     
             const hashedPassword = await bcrypt.hash(data.password, 10)
