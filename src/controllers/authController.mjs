@@ -26,3 +26,20 @@ export const loginUser = async ( req, res) =>{
         res.status(401).json({ message: error.message });
     }
 }
+
+export const getUser = async ( req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const user = await authServices.getFindById(id);
+        res.status(200).json(user);
+
+    } catch (error) {
+
+        if (error.message.includes("Usuario no encontrado")) {
+            return  res.status(404).json({ message: error.message });
+        }
+
+        res.status(500).json({ message: error.message });
+    }
+}

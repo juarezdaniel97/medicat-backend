@@ -74,6 +74,23 @@ class AuthServices extends IRepository {
             return { user: userResponse, token}
         }
     
+        async getFindById(id){
+            try {
+                const user = await User.findById(id);
+
+                if (!user) {
+                    throw new Error("Usuario no encontrado");
+                }
+
+                const userResponse = user.toObject();
+                delete userResponse.password;
+
+                return {user: userResponse};
+            } catch (error) {
+                throw new Error(`Error al obtener el usuario: ${error.message}`);
+            }
+        }
+
         generateToken(user){
             return jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: '24h'})
         }
