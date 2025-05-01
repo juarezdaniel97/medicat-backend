@@ -4,8 +4,8 @@ import { getUser, loginUser, registerUser } from "../controllers/authController.
 
 const router = express.Router();
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
-router.get('/login/:id', getUser);
+router.post('/auth/register', registerUser);
+router.post('/auth/login', loginUser);
+router.get('/auth/:id', getUser);
 
 export default router;
