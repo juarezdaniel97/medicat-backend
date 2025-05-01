@@ -33,8 +33,8 @@ class ProfileService extends IRepository{
 
     async getFindById(id){
         try {
-            const profile = await Profile.findById(id).populate('userId', 'username email')
-            
+            //const profile = await Profile.findById(id).populate('userId', 'username email')
+            const profile = await Profile.findOne({ userId: id });
             if (!profile) {
                 throw new Error("Perfil no encontrado");
             }
