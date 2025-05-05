@@ -34,6 +34,7 @@ class PatientProfileServices extends IRepository{
     async getFindById(id){
 
         const profile = await PatientProfile.findById(id).populate('profileId');;
+        //const profile = await PatientProfile.findOne({ profileId: id }).populate('profileId');
         if (!profile) {
             throw new Error("Perfil de paciente no encontrado");
         }

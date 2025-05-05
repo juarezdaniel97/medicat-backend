@@ -76,7 +76,7 @@ class AuthServices extends IRepository {
     
         async getFindById(id){
             try {
-                const user = await User.findById(id);
+                const user = await User.findById(id).populate('role', 'name');
 
                 if (!user) {
                     throw new Error("Usuario no encontrado");
