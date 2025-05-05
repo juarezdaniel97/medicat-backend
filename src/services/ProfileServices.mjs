@@ -47,8 +47,8 @@ class ProfileService extends IRepository{
 
     async update(id, data){
         try {
-            const profile = await Profile.findByIdAndUpdate(id, {...data, updatedAt: Date.now() }, {new: true})
-            
+            //const profile = await Profile.findByIdAndUpdate(id, {...data, updatedAt: Date.now() }, {new: true})
+            const profile = await Profile.findOneAndUpdate({ userId: id }, { ...data, updatedAt: Date.now() }, { new: true });
             if (!profile) {
                 throw new Error('Perfil no encontrado para actualizar.');
             }
