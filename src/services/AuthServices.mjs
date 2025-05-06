@@ -54,7 +54,7 @@ class AuthServices extends IRepository {
     
         async login(email, password) {
             
-            const user = await User.findOne({email});
+            const user = await User.findOne({email}).populate('role', 'name');
             
             if (!user) {
                 throw new Error("Usuario no encontrado");
@@ -68,7 +68,8 @@ class AuthServices extends IRepository {
     
             const userResponse = user.toObject();
             delete userResponse.password;
-    
+            delete userResponse.role.name
+            
             //Generar un nuevo token
             const token = this.generateToken(user);
             return { user: userResponse, token}
@@ -92,7 +93,7 @@ class AuthServices extends IRepository {
         }
 
         generateToken(user){
-            return jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: '24h'})
+            return jwt.sign({ id: user._id, role: user.role.name}, process.env.JWT_SECRET, {expiresIn: '24h'})
         }
 }
 

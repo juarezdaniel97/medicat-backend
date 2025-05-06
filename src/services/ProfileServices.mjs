@@ -64,7 +64,7 @@ class ProfileService extends IRepository{
 
         try {
             
-            const profile = await Profile.findByIdAndDelete(id)
+            const profile = await Profile.findByIdAndDelete(id) //Modificar para eliminar por userId
             
             if (!profile) {
                 throw new Error("Perfil no encontrado para eliminar.");
