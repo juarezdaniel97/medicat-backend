@@ -8,15 +8,13 @@ class MedicoProfileServices extends IRepository{
         const existingProfile = await DoctorProfile.findOne({ userId: data.userId });
 
         if (existingProfile) {
-            throw new Error("Ya existe un perfil de doctor para este usuario.");
+            throw new Error("Ya existe un perfil de médico para este usuario.");
         }
         const doctorProfile = new DoctorProfile(data);
         return await doctorProfile.save();
     }
 
-    async update(id, data){
-        
-        //const doctorProfile = await  DoctorProfile.findByIdAndUpdate(id, data, { new: true });
+    async update(id, data){;
         const doctorProfile = await DoctorProfile.findOneAndUpdate({ userId: id }, { ...data, updatedAt: Date.now() }, { new: true });
         
         if (!doctorProfile) {
@@ -26,7 +24,6 @@ class MedicoProfileServices extends IRepository{
     }
 
     async deleteById(id){
-        //const deleted = await DoctorProfile.findByIdAndDelete(id)
         const deleted = await DoctorProfile.findOneAndDelete({ userId: id });
         if (!deleted) {
             throw new Error("Perfil de médico no encontrado");
@@ -36,7 +33,6 @@ class MedicoProfileServices extends IRepository{
     }
 
     async getFindById(id){
-        //const perfilCompleto = await DoctorProfile.findById(id).populate('profileId')
         const profile = await DoctorProfile.findOne({ userId: id }).populate('userId', 'username email');
 
         if (!profile) {
@@ -46,7 +42,6 @@ class MedicoProfileServices extends IRepository{
     }
 
     async getAll(){
-        //return await DoctorProfile.find().populate('profileId');
         return await DoctorProfile.find().populate('userId', 'email');
     }
 

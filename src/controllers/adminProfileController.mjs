@@ -3,8 +3,11 @@ import AdminProfileSercives from "../services/AdminProfileServices.mjs";
 
 export const createAdmin = async (req, res) => {
     try {
+        const { id } = req.user;
         const data = req.body;
-        const admin = await AdminProfileSercives.create(data)
+        const datosUser = { userId: id, ...data } //agrego el id al body para crear el perfil
+
+        const admin = await AdminProfileSercives.create(datosUser)
         res.status(201).json(admin);
 
     } catch (error) {
@@ -22,8 +25,10 @@ export const updateAdmin = async (req, res) => {
     try {
         const { id } = req.params;
         const data = req.body;
+
         const updated = await AdminProfileSercives.update(id, data);
         res.status(200).json(updated);
+
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -33,6 +38,7 @@ export const deleteAdmin = async (req, res) => {
     try {
             const { id } = req.params;
             const deleted = await AdminProfileSercives.deleteById(id);
+            
             res.status(200).json({ message: "Perfil de administrador eliminado", deleted });
     
         } catch (error) {
