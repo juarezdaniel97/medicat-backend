@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const appointmentSchema = new mongoose.Schema({
     
-    doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'DoctorProfile', required: true },
-    patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },
+    medicoId: { type: mongoose.Schema.Types.ObjectId, ref: 'MedicoProfile', required: true },
+    patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'PatientProfile', required: true },
     appointmentDate: { type: Date, required: true },
     reason: { type: String }, // motivo del turno (opcional)
     status: { 

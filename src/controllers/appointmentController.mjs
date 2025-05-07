@@ -3,11 +3,16 @@ import AppointmentServices from "../services/AppointmentServices.mjs";
 export const createAppointment = async (req, res) => {
     try {
         const data = req.body;
-        const appointment = await AppointmentServices.create(data);
+        const { id } = req.user; //id del paciente logueado
+        const datosUser = { patientId: id, ...data } //agrego el id al body para crear la cita
+
+        const appointment = await AppointmentServices.create(datosUser);
+
         res.status(201).json(appointment);
 
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        
+        res.status(500).json({ message: error.message });
     }
 } 
 

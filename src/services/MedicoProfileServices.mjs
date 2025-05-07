@@ -1,21 +1,21 @@
 import { IRepository } from "../repository/IRepository.mjs";
-import DoctorProfile from "../models/DoctorProfile.mjs";
+import MedicoProfile from "../models/MedicoProfile.mjs";
 
 class MedicoProfileServices extends IRepository{
 
     async create(data){
         
-        const existingProfile = await DoctorProfile.findOne({ userId: data.userId });
+        const existingProfile = await MedicoProfile.findOne({ userId: data.userId });
 
         if (existingProfile) {
             throw new Error("Ya existe un perfil de médico para este usuario.");
         }
-        const doctorProfile = new DoctorProfile(data);
+        const doctorProfile = new MedicoProfile(data);
         return await doctorProfile.save();
     }
 
     async update(id, data){;
-        const doctorProfile = await DoctorProfile.findOneAndUpdate({ userId: id }, { ...data, updatedAt: Date.now() }, { new: true });
+        const doctorProfile = await MedicoProfile.findOneAndUpdate({ userId: id }, { ...data, updatedAt: Date.now() }, { new: true });
         
         if (!doctorProfile) {
             throw new Error("Perfil de médico no encontrado");
@@ -24,7 +24,7 @@ class MedicoProfileServices extends IRepository{
     }
 
     async deleteById(id){
-        const deleted = await DoctorProfile.findOneAndDelete({ userId: id });
+        const deleted = await MedicoProfile.findOneAndDelete({ userId: id });
         if (!deleted) {
             throw new Error("Perfil de médico no encontrado");
         }
@@ -33,7 +33,7 @@ class MedicoProfileServices extends IRepository{
     }
 
     async getFindById(id){
-        const profile = await DoctorProfile.findOne({ userId: id }).populate('userId', 'username email');
+        const profile = await MedicoProfile.findOne({ userId: id }).populate('userId', 'username email');
 
         if (!profile) {
             throw new Error("Perfil de medico no encontrado");
@@ -42,7 +42,7 @@ class MedicoProfileServices extends IRepository{
     }
 
     async getAll(){
-        return await DoctorProfile.find().populate('userId', 'email');
+        return await MedicoProfile.find().populate('userId', 'email');
     }
 
 }

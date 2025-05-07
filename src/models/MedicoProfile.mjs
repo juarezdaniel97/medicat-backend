@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
-const doctorProfileSchema = new mongoose.Schema({
+const medicoProfileSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
-    // profileId: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true, unique: true },
     firstName: {type: String}, //agregue
     lastName: {type: String}, //agregue
     specialty: { type: String },
@@ -14,4 +13,4 @@ const doctorProfileSchema = new mongoose.Schema({
     updatedAt: {type: Date, default: Date.now}
 });
 
-export default mongoose.model('DoctorProfile', doctorProfileSchema);
+export default mongoose.model('MedicoProfile', medicoProfileSchema);
