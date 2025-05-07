@@ -1,6 +1,7 @@
 
 import { IRepository } from "../repository/IRepository.mjs";
 import PatientProfile from "../models/PatientProfile.mjs";
+import Appointment from "../models/Appointment.mjs";
 
 class PatientProfileService extends IRepository{
     
@@ -75,6 +76,26 @@ class PatientProfileService extends IRepository{
         } catch (error) {
             throw new Error(`Error al eliminar el perfil: ${error.message}`); 
         }
+    }
+
+    async appointmentByPatientId(id){
+         //Pacientes pueden ver sus citas
+        const appointment = await Appointment.find({ patientId: id }).populate('medicoId');
+        
+        if (!appointment) {
+            throw new Error("No hay citas para este paciente.");
+        } 
+
+        const datosSimplificados = appointment.map((app) => ({
+            id: app._id,
+            medico: app.medicoId.firstName + " " + app.medicoId.lastName,
+            especialidad: app.medicoId.specialty,
+            precio: app.medicoId.consultationFee,
+            fecha: app.appointmentDate,
+            estado: app.status,
+        }));
+
+        return datosSimplificados;
     }
 }
 

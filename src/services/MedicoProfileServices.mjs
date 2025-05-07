@@ -1,5 +1,6 @@
 import { IRepository } from "../repository/IRepository.mjs";
 import MedicoProfile from "../models/MedicoProfile.mjs";
+import Appointment from "../models/Appointment.mjs";
 
 class MedicoProfileServices extends IRepository{
 
@@ -43,6 +44,30 @@ class MedicoProfileServices extends IRepository{
 
     async getAll(){
         return await MedicoProfile.find().populate('userId', 'email');
+    }
+
+    async getAppointmentByPatient(id){
+        const appointment = await Appointment.find({ medicoId: id }).populate({path: 'patientId', populate: {path: 'userId', select: 'email'}});
+        
+        if (!appointment) {
+            throw new Error("No tienes turnos designados.");
+        }
+
+        const datosSimplificados = appointment.map(cita => ({
+            turnoId: cita._id,
+            fecha: cita.appointmentDate,
+            estado: cita.status,
+            motivo: cita.reason,
+            paciente: {
+                nombreCompleto: `${cita.patientId.firstName} ${cita.patientId.lastName}`,
+                email: cita.patientId.userId.email,
+                telefono: cita.patientId.phoneNumber,
+                fechaNacimiento: cita.patientId.dateOfBirth,
+                direccion: cita.patientId.address,
+                genero: cita.patientId.gender
+            }
+        }));
+        return datosSimplificados;
     }
 
 }

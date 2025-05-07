@@ -68,3 +68,17 @@ export const listMedico = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+export const getAppointmentByPatient = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const appointment = await MedicoProfileServices.getAppointmentByPatient(id);
+        res.status(200).json(appointment);
+
+    } catch (error) {
+        if (error.message.includes("No tienes turnos designados")) {
+            return res.status(404).json({ message: error.message });
+        }
+        res.status(500).json({ message: error.message });
+    }
+}

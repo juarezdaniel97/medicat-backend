@@ -4,6 +4,7 @@ import { verifyToken } from "../middleware/authMiddleware.mjs";
 import { 
     createProfile, 
     deleteProfile, 
+    getAppointmentByPatient, 
     getProfile, 
     listProfile, 
     updateProfile } from "../controllers/patientProfileController.mjs";
@@ -24,5 +25,8 @@ router.get("/profiles/list", verifyToken, listProfile);
 
 //Obtener perfil por ID
 router.get("/profile/:id", verifyToken, getProfile);
+
+//Obtener los turnos del paciente
+router.get("/profile/turno/:id", verifyToken, getAppointmentByPatient);
 
 export default router;

@@ -2,6 +2,7 @@ import express from "express"
 import { 
     createMedico, 
     deleteMedico, 
+    getAppointmentByPatient, 
     getMedico, 
     listMedico, 
     updateMedico } from "../controllers/medicoProfileController.mjs";
@@ -23,5 +24,9 @@ router.get('/medico/list', verifyToken, listMedico);
 
 // Obtener perfil del doctor por ID
 router.get('/medico/:id', verifyToken, getMedico);
+
+//Obtener turnos desigados
+router.get('/medico/turnos/:id', verifyToken, getAppointmentByPatient);
+
 
 export default router;

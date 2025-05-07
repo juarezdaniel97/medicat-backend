@@ -6,7 +6,6 @@ class AppointmentServices extends IRepository{
 
     async create(data){
         //Los pacientes pueden crear citas sin tener un perfil de administrador
-        
         const appointment = new Appointment(data);
         return await appointment.save();
     }
@@ -30,6 +29,13 @@ class AppointmentServices extends IRepository{
     async getAll(){
         //Admin pueden ver todas las citas
         return await Appointment.find().populate('doctorId').populate('patientId');
+    }
+
+    
+    //esto iria en medicoProfile
+    async appointmentByMedicoId(medicoId){
+        //Medicos pueden ver sus citas
+        return await Appointment.find({ medicoId }).populate('doctorId').populate('patientId');
     }
 }
 
