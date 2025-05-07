@@ -12,21 +12,21 @@ import {
 const router = express.Router();
 
 //Crear un perfil (datos basicos: nombre, sexo, dirección, etc)
-router.post("/profile/create", verifyToken, createProfile);
+router.post("/paciente/create", verifyToken, createProfile);
 
 //Actualizar un perfil
-router.put("/profile/update/:id", verifyToken, updateProfile);
+router.put("/paciente/update/:id", verifyToken, updateProfile);
 
 //Eliminar un perfil
-router.delete("/profile/delete/:id",verifyToken, deleteProfile);
+router.delete("/paciente/delete/:id",verifyToken, deleteProfile);
 
 //Obtener todos los perfiles 
-router.get("/profiles/list", verifyToken, listProfile);
+router.get("/paciente/list", verifyToken, listProfile);
 
 //Obtener perfil por ID
-router.get("/profile/:id", verifyToken, getProfile);
+router.get("/paciente/:id", verifyToken, getProfile);
 
 //Obtener los turnos del paciente
-router.get("/profile/turno/:id", verifyToken, getAppointmentByPatient);
+router.get("/paciente/turno/:id", verifyToken, getAppointmentByPatient);
 
 export default router;
