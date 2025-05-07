@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 const appointmentSchema = new mongoose.Schema({
     
     doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'DoctorProfile', required: true },
-    patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'PatientProfile', required: true },
+    patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },
     appointmentDate: { type: Date, required: true },
     reason: { type: String }, // motivo del turno (opcional)
     status: { 
         type: String, 
-        enum: ['scheduled', 'completed', 'cancelled'], 
-        default: 'scheduled' 
+        enum: ['programado', 'completado', 'cancelado'], 
+        default: 'programado' 
     },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

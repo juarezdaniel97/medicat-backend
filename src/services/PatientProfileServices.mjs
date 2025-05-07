@@ -1,11 +1,12 @@
-import Profile from "../models/Profile.mjs";
-import { IRepository } from "../repository/IRepository.mjs";
 
-class ProfileService extends IRepository{
+import { IRepository } from "../repository/IRepository.mjs";
+import PatientProfile from "../models/PatientProfile.mjs";
+
+class PatientProfileService extends IRepository{
     
     async getAll(){
         try {
-            const profiles = await Profile.find();
+            const profiles = await PatientProfile.find();
             return profiles;
 
         } catch (error) {
@@ -16,12 +17,12 @@ class ProfileService extends IRepository{
     async create(data){
         try {
 
-            const existingProfile = await Profile.findOne({userId: data.userId});
+            const existingProfile = await PatientProfile.findOne({userId: data.userId});
             if (existingProfile) {
                 throw new Error("El perfil para este usuario ya existe.");
             }
 
-            const profile = new Profile(data);
+            const profile = new PatientProfile(data);
             await profile.save();
 
             return profile;
@@ -33,7 +34,7 @@ class ProfileService extends IRepository{
 
     async getFindById(id){
         try {
-            const profile = await Profile.findOne({ userId: id }).populate('userId', 'username email');
+            const profile = await PatientProfile.findOne({ userId: id }).populate('userId', 'username email');
             if (!profile) {
                 throw new Error("Perfil no encontrado");
             }
@@ -48,7 +49,7 @@ class ProfileService extends IRepository{
     async update(id, data){
         try {
             //const profile = await Profile.findByIdAndUpdate(id, {...data, updatedAt: Date.now() }, {new: true})
-            const profile = await Profile.findOneAndUpdate({ userId: id }, { ...data, updatedAt: Date.now() }, { new: true });
+            const profile = await PatientProfile.findOneAndUpdate({ userId: id }, { ...data, updatedAt: Date.now() }, { new: true });
             if (!profile) {
                 throw new Error('Perfil no encontrado para actualizar.');
             }
@@ -64,8 +65,8 @@ class ProfileService extends IRepository{
 
         try {
             
-            const profile = await Profile.findByIdAndDelete(id) //Modificar para eliminar por userId
-            
+            //const profile = await PatientProfile.findByIdAndDelete(id) //Modificar para eliminar por userId
+            const profile = await PatientProfile.findOneAndDelete({ userId: id });
             if (!profile) {
                 throw new Error("Perfil no encontrado para eliminar.");
             }
@@ -77,4 +78,4 @@ class ProfileService extends IRepository{
     }
 }
 
-export default new ProfileService();
+export default new PatientProfileService();

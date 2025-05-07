@@ -5,7 +5,7 @@ import cors from "cors";
 import authRoutes from './routes/authRoutes.mjs';
 import roleRoutes from './routes/roleRoutes.mjs';
 import permissionRoutes from "./routes/permissionRoutes.mjs";
-import profileRoutes from "./routes/profileRoutes.mjs";
+import patientRoutes from "./routes/patientProfileRoutes.mjs"
 import doctorRoutes from "./routes/doctorRoutes.mjs";
 import adminRoutes from "./routes/adminRoutes.mjs";
 import appointmentRoutes from "./routes/appointmentRoutes.mjs";
@@ -39,7 +39,7 @@ app.use(cors(corsOptions));
 app.use('/api', authRoutes)
 app.use("/api", roleRoutes);
 app.use("/api", permissionRoutes);
-app.use("/api", profileRoutes);
+app.use("/api", patientRoutes);
 app.use("/api", doctorRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", appointmentRoutes);

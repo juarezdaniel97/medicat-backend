@@ -5,7 +5,8 @@ class DoctorProfileServices extends IRepository{
 
     async create(data){
         
-        const existingProfile = await DoctorProfile.findOne({ profileId: data.profileId });
+        //const existingProfile = await DoctorProfile.findOne({ profileId: data.profileId });
+        const existingProfile = await Profile.findOne({userId: data.userId});
         
         if (existingProfile) {
             throw new Error("Ya existe un perfil de doctor para este usuario.");

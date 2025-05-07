@@ -1,11 +1,11 @@
-import ProfileServices from "../services/ProfileServices.mjs"
+import PatientProfileServices from "../services/PatientProfileServices.mjs";
 
 
 export const getProfile = async (req, res) =>{
     try {
         const { id } = req.params;
                 
-        const profile  = await ProfileServices.getFindById(id);
+        const profile  = await PatientProfileServices.getFindById(id);
         res.status(200).json(profile);
 
     } catch (error) {
@@ -26,7 +26,7 @@ export const createProfile = async (req, res) =>{
 
         const datosUser = { userId: id,  ...data}
         
-        const profile = await ProfileServices.create(datosUser);
+        const profile = await PatientProfileServices.create(datosUser);
         res.status(201).json(profile);
 
     } catch (error) {
@@ -43,7 +43,7 @@ export const createProfile = async (req, res) =>{
 export const updateProfile = async (req, res) =>{
     try {
         const { id } = req.params;
-        const updateProfile = await ProfileServices.update(id, req.body);
+        const updateProfile = await PatientProfileServices.update(id, req.body);
         res.status(200).json(updateProfile);
 
     } catch (error) {
@@ -57,7 +57,7 @@ export const updateProfile = async (req, res) =>{
 export const deleteProfile = async (req, res) =>{
     try {
         const { id } = req.params;
-        const deleteProfile = await ProfileServices.deleteById(id);
+        const deleteProfile = await PatientProfileServices.deleteById(id);
         res.status(200).json({message: "Perfil Eliminado", deleteProfile});
 
     } catch (error) {
@@ -71,7 +71,7 @@ export const deleteProfile = async (req, res) =>{
 
 export const listProfile = async (req, res) =>{
     try {
-        const profiles = await ProfileServices.getAll();
+        const profiles = await PatientProfileServices.getAll();
         res.status(200).json(profiles);
 
     } catch (error) {

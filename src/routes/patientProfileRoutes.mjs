@@ -1,12 +1,12 @@
 import express from "express";
+
+import { verifyToken } from "../middleware/authMiddleware.mjs";
 import { 
     createProfile, 
-    updateProfile,
-    deleteProfile,
-    getProfile,
-    listProfile
-} from "../controllers/profileController.mjs";
-import { verifyToken } from "../middleware/authMiddleware.mjs";
+    deleteProfile, 
+    getProfile, 
+    listProfile, 
+    updateProfile } from "../controllers/patientProfileController.mjs";
 
 const router = express.Router();
 
