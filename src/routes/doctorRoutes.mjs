@@ -4,18 +4,18 @@ import { createDoctor, deleteDoctor, getDoctor, listDoctor, updatedoctor } from 
 const router = express.Router();
 
 // Crear perfil de doctor
-router.post('/doctor/create', createDoctor);
+router.post('/medico/create', createDoctor);
 
 // Actualizar perfil doctor
-router.put('/doctor/update/:id', updatedoctor);
+router.put('/medico/update/:id', updatedoctor);
 
 // Eliminar perfil doctor
-router.delete('/doctor/delete/:id', deleteDoctor);
+router.delete('/medicor/delete/:id', deleteDoctor);
 
 // Obtener todos los doctores 
-router.get('/doctor/list', listDoctor);
+router.get('/medico/list', listDoctor);
 
 // Obtener perfil del doctor por ID
-router.get('/doctor/:id', getDoctor);
+router.get('/medico/:id', getDoctor);
 
 export default router;
