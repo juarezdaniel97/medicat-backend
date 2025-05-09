@@ -9,14 +9,16 @@ class AuthServices extends IRepository {
         async register(data){
             
             //Validar que el email y username no existan
-            const exitingUser = await User.findOne({  $or: [
-                { email: data.email },
-                { username: data.username }
-            ]})
+            // const exitingUser = await User.findOne({  $or: [
+            //     { email: data.email },
+            //     { username: data.username }
+            // ]})
+
+            const exitingUser = await User.findOne({email: data.email});
 
 
             if (exitingUser) {
-                throw new Error("El usuario y/o email ya existe");
+                throw new Error("El email ya existe en el sistema.");
             }
             
             const hashedPassword = await bcrypt.hash(data.password, 10)
