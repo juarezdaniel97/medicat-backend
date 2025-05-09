@@ -7,8 +7,8 @@ import bcrypt from "bcryptjs";
 class AuthServices extends IRepository {
         
         async register(data){
-    
-            //const exitingUser = await User.findOne({ username: data.username})
+            
+            //Validar que el email y username no existan
             const exitingUser = await User.findOne({  $or: [
                 { email: data.email },
                 { username: data.username }
@@ -18,9 +18,9 @@ class AuthServices extends IRepository {
             if (exitingUser) {
                 throw new Error("El usuario y/o email ya existe");
             }
-    
+            
             const hashedPassword = await bcrypt.hash(data.password, 10)
-    
+            
             //Buscar el rol, si no lo mandan va por defecto el Paciente
             let roleId = data.roleId;            
             
@@ -34,6 +34,8 @@ class AuthServices extends IRepository {
                 
                 roleId = defaultRole._id;
             }
+
+
 
             const newUser = new User({
                 ...data,
@@ -91,6 +93,27 @@ class AuthServices extends IRepository {
                 throw new Error(`Error al obtener el usuario: ${error.message}`);
             }
         }
+
+        async update(id, data){
+            const user = await User.findById(id);
+
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+
+            //Actualizar el usuario
+            const updatedUser = await User.findByIdAndUpdate(id, {...data, updatedAt: Date.now() }, {new: true});
+            
+            const userResponse = {
+                id: updatedUser._id,
+                username: updatedUser.username,
+                email: updatedUser.email,
+                role: updatedUser.role,
+            }
+
+            return {user: userResponse};
+        }
+
 
         generateToken(user){
             return jwt.sign({ id: user._id, role: user.role.name}, process.env.JWT_SECRET, {expiresIn: '24h'})
