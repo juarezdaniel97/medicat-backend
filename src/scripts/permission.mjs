@@ -16,12 +16,12 @@ const permissions = [
     { name: "user:delete", description: "Eliminar usuarios" },
     { name: "user:list", description: "Listar todos los usuarios" },
 
-    // Perfiles
-    { name: "profile:create", description: "Crear perfiles" },
-    { name: "profile:read", description: "Ver información de perfiles" },
-    { name: "profile:update", description: "Modificar perfiles" },
-    { name: "profile:delete", description: "Eliminar perfiles" },
-    { name: "profile:list", description: "Listar todos los perfiles" },
+    // Perfiles de usuario
+    { name: "profile:read", description: "Ver perfil de usuario" },
+    { name: "profile:update", description: "Modificar perfil de usuario" },
+    { name: "profile:delete", description: "Eliminar perfil de usuario" },
+    { name: "profile:list", description: "Listar todos los perfiles de usuario" },
+
 
     // Turnos
     { name: "appointment:create", description: "Crear nuevos turnos" },
@@ -29,15 +29,7 @@ const permissions = [
     { name: "appointment:update", description: "Modificar turnos existentes" },
     { name: "appointment:delete", description: "Eliminar turnos" },
     { name: "appointment:list", description: "Listar todos los turnos" },
-    { name: "appointment:approve", description: "Aprobar turnos" },
-    { name: "appointment:reject", description: "Rechazar turnos" },
 
-    // Especialidades
-    { name: "specialty:create", description: "Crear especialidades" },
-    { name: "specialty:read", description: "Ver especialidades" },
-    { name: "specialty:update", description: "Modificar especialidades" },
-    { name: "specialty:delete", description: "Eliminar especialidades" },
-    { name: "specialty:list", description: "Listar especialidades" },
 
     // Historias clínicas
     { name: "medical_history:create", description: "Crear historia clínica" },

@@ -22,11 +22,9 @@ const roleMedico = new Role({
     description: "Médico",
     permission: await Permission.find({
         name: { $in: [
-            "profile:read",
-            "appointment:create", "appointment:read", "appointment:update", "appointment:list",
-            "appointment:approve", "appointment:reject",
+            "profile:read", "profile:update",
+            "appointment:read", "appointment:update",
             "medical_history:create", "medical_history:read", "medical_history:update",
-            "specialty:read", "specialty:list"
         ]}
     }).then(perms => perms.map(p => p._id))
 });
@@ -37,8 +35,7 @@ const rolePaciente = new Role({
     permission: await Permission.find({
         name: { $in: [
             "profile:read", "profile:update",
-            "appointment:create", "appointment:read", "appointment:update", "appointment:list",
-            "specialty:read", "specialty:list",
+            "aappointment:create", "appointment:read", "appointment:update",
             "medical_history:read"
         ]}
     }).then(perms => perms.map(p => p._id))
