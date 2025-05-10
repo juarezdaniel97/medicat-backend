@@ -34,12 +34,18 @@ class MedicoProfileServices extends IRepository{
     }
 
     async getFindById(id){
-        const profile = await MedicoProfile.findOne({ userId: id }).populate('userId', 'username email');
 
-        if (!profile) {
-            throw new Error("Perfil de medico no encontrado");
+        try {
+            const profile = await MedicoProfile.findOne({ userId: id }).populate('userId', 'email');
+
+                if (!profile) {
+                    throw new Error("Perfil de medico no encontrado");
+                }
+            return {profileUser: profile};
+        } catch (error) {
+            throw new Error(`Error al obtener el perfil: ${error.message}`);
         }
-        return profile;
+        
     }
 
     async getAll(){
