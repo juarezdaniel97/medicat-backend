@@ -24,9 +24,7 @@ class PatientProfileService extends IRepository{
             }
 
             const profile = new PatientProfile(data);
-            await profile.save();
-
-            return profile;
+            return await profile.save();
 
         } catch (error) {
             throw new Error(`Error al crear el perfil: ${error.message}`);

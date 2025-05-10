@@ -7,14 +7,8 @@ import bcrypt from "bcryptjs";
 class AuthServices extends IRepository {
         
         async register(data){
-            
-            //Validar que el email y username no existan
-            // const exitingUser = await User.findOne({  $or: [
-            //     { email: data.email },
-            //     { username: data.username }
-            // ]})
 
-            const exitingUser = await User.findOne({email: data.email});
+            const exitingUser = await User.findOne({email: data.email})
 
 
             if (exitingUser) {
@@ -45,13 +39,13 @@ class AuthServices extends IRepository {
                 role: roleId 
             });
     
-            await newUser.save();
-    
-            const userResponse = newUser.toObject();
-    
+            const creado = await newUser.save();
+            
+            const userResponse = creado.toObject();
+            
             delete userResponse.password;
-    
-            const token = this.generateToken(userResponse);
+
+            const token = this.generateToken(newUser);
         
             return {user: userResponse, token}
         }
@@ -118,7 +112,7 @@ class AuthServices extends IRepository {
 
 
         generateToken(user){
-            return jwt.sign({ id: user._id, role: user.role.name}, process.env.JWT_SECRET, {expiresIn: '24h'})
+            return jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: '24h'})
         }
 }
 
