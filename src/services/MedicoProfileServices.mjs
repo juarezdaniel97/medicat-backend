@@ -53,6 +53,7 @@ class MedicoProfileServices extends IRepository{
     }
 
     async getAppointmentByPatient(id){
+        
         const appointment = await Appointment.find({ medicoId: id }).populate({path: 'patientId', populate: {path: 'userId', select: 'email'}});
         
         if (!appointment) {
