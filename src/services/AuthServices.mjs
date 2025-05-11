@@ -40,14 +40,15 @@ class AuthServices extends IRepository {
             });
     
             const creado = await newUser.save();
-            
-            const userResponse = creado.toObject();
-            
-            delete userResponse.password;
 
-            const token = this.generateToken(newUser);
-        
-            return {user: userResponse, token}
+            const userWhitRole = await User.findById(creado._id).populate('role','name');
+    
+            const userResponse = userWhitRole.toObject();
+            delete userResponse.password;
+            delete userResponse.role.name;
+            
+            const token = this.generateToken(userWhitRole);
+            return { user: userResponse, token}
         }
     
         async login(email, password) {
