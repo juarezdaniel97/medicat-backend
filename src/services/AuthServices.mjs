@@ -42,7 +42,7 @@ class AuthServices extends IRepository {
             const creado = await newUser.save();
 
             const userWhitRole = await User.findById(creado._id).populate('role','name');
-    
+            
             const userResponse = userWhitRole.toObject();
             delete userResponse.password;
             delete userResponse.role.name;
