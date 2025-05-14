@@ -8,7 +8,7 @@ const appointmentSchema = new mongoose.Schema({
     reason: { type: String }, // motivo del turno (opcional)
     status: { 
         type: String, 
-        enum: ['programado', 'completado', 'cancelado'], 
+        enum: ['programado', 'confirmado','completado', 'cancelado'], 
         default: 'programado' 
     },
     createdAt: { type: Date, default: Date.now },
