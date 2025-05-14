@@ -23,12 +23,12 @@ class AppointmentServices extends IRepository{
     async getFindById(id){
         //Pacientes pueden ver sus citas
         //Medicos pueden ver sus citas
-        return await Appointment.findById(id).populate('doctorId').populate('patientId');
+        return await Appointment.findById(id);
     }
 
     async getAll(){
         //Admin pueden ver todas las citas
-        return await Appointment.find().populate('doctorId').populate('patientId');
+        return await Appointment.find();
     }
 
     
