@@ -6,6 +6,6 @@ import { enviarSMS } from "../controllers/twilioController.mjs";
 
 const router = express.Router();
 
-router.post('/send-sms', enviarSMS);
+router.post('/send-sms', verifyToken, enviarSMS);
 
 export default router
