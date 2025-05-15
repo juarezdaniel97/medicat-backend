@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const medicoProfileSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
-    firstName: {type: String}, //agregue
-    lastName: {type: String}, //agregue
+    firstName: {type: String}, 
+    lastName: {type: String}, 
     specialty: { type: String },
     licenseNumber: {type: String, unique: true},
     consultationFee: {type: Number},

@@ -4,6 +4,7 @@ import AdminProfileSercives from "../services/AdminProfileServices.mjs";
 export const createAdmin = async (req, res) => {
     try {
         const { id } = req.user;
+        
         const data = req.body;
         const datosUser = { userId: id, ...data } //agrego el id al body para crear el perfil
 
