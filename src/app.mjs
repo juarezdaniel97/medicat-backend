@@ -9,6 +9,7 @@ import patientRoutes from "./routes/patientProfileRoutes.mjs";
 import medicoRoutes from "./routes/medicoRoutes.mjs";
 import adminRoutes from "./routes/adminRoutes.mjs";
 import appointmentRoutes from "./routes/appointmentRoutes.mjs";
+import twilioRoures from './routes/twilioRoutes.mjs'//agregue
 
 
 //CARGAR LAS VARIABLES DE ENTORNO
@@ -34,6 +35,7 @@ connect_BD();
 //MIDDLEWARE
 app.use(express.json());
 app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }));//agregue
 
 //RUTAS
 app.use('/api', authRoutes)
@@ -43,6 +45,7 @@ app.use("/api", patientRoutes);
 app.use("/api", medicoRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", appointmentRoutes);
+app.use("/api/twilio", twilioRoures);
 
 
 // Health check endpoint
