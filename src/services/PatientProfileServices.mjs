@@ -7,7 +7,7 @@ class PatientProfileService extends IRepository{
     
     async getAll(){
         try {
-            const profiles = await PatientProfile.find();
+            const profiles = await PatientProfile.find().populate('userId','email');
             return profiles;
 
         } catch (error) {
