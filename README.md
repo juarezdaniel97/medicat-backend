@@ -86,7 +86,7 @@ node app.mjs
 
 Este proyecto fue desarrollado por **Daniel Juárez** como **Trabajo Final** de la **Diplomatura en Desarrollo Full Stack**.
 
-📍 La diplomatura fue dictada por el **Nodo Tecnológico de Catamarca** en conjunto con la **Facultad de Ciencias Exactas y Tecnologías** de la **Universidad Nacional de Catamarca (UNCA)**.
+📍 La diplomatura fue dictada por el **Nodo Tecnológico de Catamarca** en conjunto con la **Facultad de Tecnología y Ciencias Aplicadas** de la **Universidad Nacional de Catamarca (UNCA)**.
 
 > 🎓 El propósito de este proyecto es demostrar los conocimientos adquiridos durante la formación, aplicando tecnologías modernas de desarrollo backend en un caso de uso real: la gestión de turnos médicos.
 
